@@ -21,6 +21,16 @@
 #ifndef COSA_MEMORY_H
 #define COSA_MEMORY_H
 
-#include "Cosa/Memory.hh"
+/**
+ * Return amount of free memory.
+ * @return number of bytes.
+ */
+int
+free_memory()
+{
+  extern int __heap_start, *__brkval;
+  int v;
+  return ((int) &v - (__brkval == 0 ? (int) &__heap_start : (int) __brkval));
+}
 
 #endif
